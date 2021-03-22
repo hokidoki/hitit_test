@@ -2,12 +2,27 @@ import React,{useState}from 'react'
 import { SearchBox, SearchContainer } from '../styled/layout'
 import SearchInput from '../Components/SearchInput'
 
+interface InterfaceShortResult{
+    Title : string,
+    Poster : string,
+    Type : string,
+    Year : string,
+    imdbID : string
+}
 
-
+interface InterfaceSearchingResult {
+    title : string,
+    list : Array<InterfaceShortResult> ,
+    page : number
+}
 
 export default function Search() {
 
-    const [searchList,setSearchList] = useState([]);
+    const [searchingResult, setSerachingResult] = useState<InterfaceSearchingResult>({
+        title : "",
+        list : [],
+        page : 0
+    })
     
     const movieTitleSearch = async (title : string, page : number = 1) => {
         const URL = await fetch(`https://www.omdbapi.com/?s=${title}&page=${page}&apikey=ac2eb9f1`);
@@ -16,7 +31,17 @@ export default function Search() {
         //page = 1 < n < 100
         const getJson = await URL.json();
 
-        console.log(getJson);
+        //Todo 동일한  title이 전달 되면 결과 push
+        //Todo 동일하지 않다면 새로운 list제공
+        let list : Array<InterfaceShortResult> = title == searchingResult.title ? 
+            [...searchingResult.list,...getJson] : 
+            [...getJson];
+
+        setSerachingResult({
+            title,
+            list,
+            page
+        })
     } 
     
     return (
@@ -24,7 +49,6 @@ export default function Search() {
             <SearchBox>
                 <SearchInput movieTitleSearch={movieTitleSearch}></SearchInput>
             </SearchBox>
-            {/* <button onClick={movieTitleSearch}>더미</button> */}
         </SearchContainer>
     )
 }
