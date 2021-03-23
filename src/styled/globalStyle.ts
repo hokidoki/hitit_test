@@ -9,6 +9,7 @@ const GlobalStyles = createGlobalStyle`
     }
     *{
         box-sizing: border-box;
+        color : gray;
     }
     body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -22,6 +23,8 @@ const GlobalStyles = createGlobalStyle`
     }
     h1 {
         font-size : 2.5rem;
+        color : gray;
+        font-weight : 900;
     }
     h2 { 
         font-size : 2.0rem;
@@ -31,6 +34,10 @@ const GlobalStyles = createGlobalStyle`
         white-space : nowrap;
         overflow : hidden;
         font-size : 1.5rem;
+        color : gray;
+    }
+    p{
+        font-size : 1.1rem;
     }
 `;
 

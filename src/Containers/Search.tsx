@@ -12,6 +12,7 @@ export interface InterfaceShortResult {
 }
 
 interface InterfaceSearchingResult {
+    loading : boolean,
     title: string,
     list: Array<InterfaceShortResult>,
     page: number,
@@ -34,6 +35,7 @@ export default function Search() {
 
     const [sortBy,setSortBy] = useState<SortBy>(SortBy.standard);
     const [searchingResult, setSerachingResult] = useState<InterfaceSearchingResult>({
+        loading : false,
         title: "",
         list: [],
         page: 0,
@@ -41,12 +43,12 @@ export default function Search() {
     })
 
     const movieTitleSearchFetch = async (title: string = "", page: number = 1) => {
+        
         const URL = await fetch(`https://www.omdbapi.com/?s=${title}&page=${page}&apikey=ac2eb9f1`);
         //추후 Appkey변경 .
         //s = title
         //page = 1 < n < 100
         const getJson = await URL.json();
-        console.log(getJson)
         const searchingResult: Array<InterfaceShortResult> =
             getJson.Response === "True" ?
                 [...getJson.Search] : []
@@ -57,9 +59,10 @@ export default function Search() {
         return response;
     }
     const movieTitleSearch = async (title: string) => {
+        setSerachingResult(Object.assign({},searchingResult,{loading : true}));
         const response = await movieTitleSearchFetch(title);
-        console.log(response.error)
         setSerachingResult({
+            loading : false,
             title: title,
             list: response.searchingResult,
             page: 1,
@@ -68,8 +71,10 @@ export default function Search() {
     }
 
     const movieTitleSearchingUpdate = async (title: string, page: number) => {
+        setSerachingResult(Object.assign({},searchingResult,{loading : true}));
         const response = await movieTitleSearchFetch(title, page);
         setSerachingResult({
+            loading : false,
             title: title,
             list: [...searchingResult.list, ...response.searchingResult],
             page: page,
@@ -92,7 +97,8 @@ export default function Search() {
                     error={searchingResult.error}
                 />
             </SearchBox>
-            <SearchList 
+            <SearchList
+                loading={searchingResult.loading}
                 sortBy={sortBy}
                 list={searchingResult.list}
                 title={searchingResult.title}

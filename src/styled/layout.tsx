@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 
 export const AppContianer = styled.div`
-    width : 60vw;
-    height : 60vh;
+    width : 90vw;
+    height : 80vh;
     position : absolute;
     top : 50%;
     left : 50%;
     transform: translate(-50%, -50%);
+    min-width : 500px;
+    max-width : 1080px;
+    min-height : 400px;
     display : flex;
     flex-direction : column;
 `
@@ -18,28 +21,51 @@ export const MainContainer = styled.div`
     display : flex;
     flex-direction : row;
     width : 100%;
-    flex-grow : 1;
+    height : calc(80vh - 2.5rem);
     justify-content : space-between;
 `
 
 export const SearchContainer = styled.div`
     display : flex;
+    max-height : 100%;
     flex-direction : column;
     flex-basis : calc(30% - 7.5px);
     color : gray;
     padding : 10px 5px 15px 15px;
-    box-shadow: 1px 1px 10px 1px;
+    box-shadow: 1px 1px 10px 1px gray;
     border-radius : 15px;
+    overflow-y : hidden;
+`
+
+
+export const LoadingOveray = styled.div`
+    display : block;
+    position : absolute;
+    width : 100%;
+    height : 100%;
+    background : rgba(97,97,97,0.6) url("http://www.nyan.cat/cats/original.gif");
+    background-repeat : no-repeat;
+    background-position : center center;
+    background-size : 50px 50px;
+    top : 0px;
+    left : 0px;
+    border-radius : 15px;
+
 `
 
 export const DetailContainer = styled.div`
+    display : flex;
+    position : relative;
+    padding : 10px;
     flex-basis : calc(70% - 7.5px);
-    background : red;
+    box-shadow: 0px 1px 10px 0px gray;
+    background : white;
     border-radius : 15px;
 `
 
 export const SearchBox = styled.div`
     display : flex;
+    
     flex-direction : column;
     flex-basis : 50px;
 `
@@ -52,8 +78,9 @@ export const Input = styled.input`
 `
 
 export const SearchListBox = styled.div`
+position : relative;
     flex-grow : 1;
-    max-height : 400px;
+    max-height : calc(100% - 50px);
     overflow-y : scroll;
     padding : 10px 0px;
     &::-webkit-scrollbar{
@@ -66,11 +93,15 @@ export const SearchListBox = styled.div`
         border: 2px solid transparent;
     }
 `
+interface InterfaceSearchTab {
+    background: string
+}
 
-export const SearchTab = styled.div`
+export const SearchTab = styled.div<InterfaceSearchTab>`
     display : flex;
     height : 60px;
     margin-bottom : 1px;
+    background : ${props => props.background}
 `
 
 export const Thumbnail = styled.img`
@@ -95,4 +126,34 @@ export const ErrorMessage = styled.label`
 `
 export const Select = styled.select`
     border : none;
+`
+
+export const PosterSide = styled.div`
+    flex-basis : 35%;
+    max-width : 35%;
+    height : 100%;
+`
+
+export const MoviePoster = styled.img`
+    width : 100%;
+    height : 60%;
+`
+export const SubDescription = styled.span`
+    color : gray;
+    margin-top : 5px;
+`
+
+export const DescriptionSide = styled.div`
+    flex-basis : 65%;
+    max-width : 65%;
+    height : 100%;
+    padding-left : 20px;
+`
+
+export const NameTag = styled.span`
+    font-weight : 600;
+`
+
+export const DescriptionDetailDiv = styled.div`
+    margin-bottom : 10px;
 `

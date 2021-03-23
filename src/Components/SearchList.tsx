@@ -1,11 +1,12 @@
-import React from 'react'
-import { DummyContext } from '../App'
+import React,{useState} from 'react'
+import { DetailContext } from '../App'
 import { SortBy } from '../Containers/Search'
 import {
     SearchListBox,
     SearchTab,
     Thumbnail,
-    ShortBox
+    ShortBox,
+    LoadingOveray
 } from '../styled/layout'
 import { sortedList } from '../functions/sort';
 
@@ -18,6 +19,7 @@ interface InterfaceShortResult {
 }
 
 interface InterfaceSearchListProps {
+    loading : boolean,
     title: string,
     list: Array<InterfaceShortResult>,
     page: number,
@@ -25,11 +27,15 @@ interface InterfaceSearchListProps {
     update: (title: string, page: number) => void
 }
 
-export default function SearchList({ list, title, page,sortBy, update }: InterfaceSearchListProps) {
+export default function SearchList({ list, title, page,sortBy,loading, update }: InterfaceSearchListProps) {
+
+    const [clickedMovie, setClickedMovie] = useState<InterfaceShortResult | null>(null)
 
     const resultToTab = (list: Array<InterfaceShortResult>) => {
         return sortedList(list,sortBy).map((shortResult: InterfaceShortResult,index : number) => {
             return <Tab
+                clicked={shortResult === clickedMovie}
+                setClickedMovie={ ()=> setClickedMovie(shortResult)}
                 key={`${shortResult.imdbID}-${index}`}
                 Title={shortResult.Title}
                 Type={shortResult.Type}
@@ -53,18 +59,29 @@ export default function SearchList({ list, title, page,sortBy, update }: Interfa
 
     return (
         <SearchListBox onScroll={onScroll}>
+            {loading ? <LoadingOveray/> : null}
             {resultToTab(list)}
         </SearchListBox>
     )
 }
 
-function Tab({ Title, Type, Year, imdbID, Poster }: InterfaceShortResult) {
-    
+interface InterfaceTabProps extends InterfaceShortResult {
+    clicked : boolean,
+    setClickedMovie : () => void
+}
+
+function Tab({ Title, Year, imdbID, Poster, clicked, setClickedMovie}: InterfaceTabProps) {
+
     return (
-        <DummyContext.Consumer>
+        <DetailContext.Consumer>
             {
                 value => (
-                    <SearchTab onClick={()=> value.getMovieDetailFetch(imdbID)}>
+                    <SearchTab 
+                    background={clicked ? "rgba(162,162,162,0.22)" : "none"}
+                    onClick={()=> {
+                        setClickedMovie();
+                        value.getMovieDetail(imdbID);
+                    }}>
                         <Thumbnail src={Poster}></Thumbnail>
                         <ShortBox>
                             <h3 style={{"height" : "50%"}} title={Title}>{Title}</h3>
@@ -74,7 +91,7 @@ function Tab({ Title, Type, Year, imdbID, Poster }: InterfaceShortResult) {
                 )
             }
 
-        </DummyContext.Consumer>
+        </DetailContext.Consumer>
     )
 }
 
