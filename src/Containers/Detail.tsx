@@ -14,7 +14,7 @@ export default function Detail({ loading, detail, error }: InterfaceDetailWrappe
 
     return (
         <DetailContainer>
-            {loading ? <LoadingOveray /> : null }
+            {loading ? <LoadingOveray top="0px" /> : null }
             {detail ? <MovieDetail {...detail}/> : null}
         </DetailContainer>
     )

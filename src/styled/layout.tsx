@@ -36,9 +36,11 @@ export const SearchContainer = styled.div`
     border-radius : 15px;
     overflow-y : hidden;
 `
+interface InterfaceLoadingOveray{
+    top : string
+}
 
-
-export const LoadingOveray = styled.div`
+export const LoadingOveray = styled.div<InterfaceLoadingOveray>`
     display : block;
     position : absolute;
     width : 100%;
@@ -47,7 +49,7 @@ export const LoadingOveray = styled.div`
     background-repeat : no-repeat;
     background-position : center center;
     background-size : 50px 50px;
-    top : 0px;
+    top : ${props => props.top};
     left : 0px;
     border-radius : 15px;
 
@@ -82,7 +84,6 @@ position : relative;
     flex-grow : 1;
     max-height : calc(100% - 50px);
     overflow-y : scroll;
-    padding : 10px 0px;
     &::-webkit-scrollbar{
         width : 10px
     }

@@ -59,7 +59,7 @@ export default function SearchList({ list, title, page,sortBy,loading, update }:
 
     return (
         <SearchListBox onScroll={onScroll}>
-            {loading ? <LoadingOveray/> : null}
+            {loading ? <LoadingOveray top="38px"/> : null}
             {resultToTab(list)}
         </SearchListBox>
     )
