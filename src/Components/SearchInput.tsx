@@ -1,14 +1,16 @@
 import React,{useState} from 'react'
 
 import {
-    Input
+    Input,
+    ErrorMessage
 } from '../styled/layout'
 
 interface SearchInputProps {
-    movieTitleSearch : (title : string) => void
+    movieTitleSearch : (title : string) => void,
+    error : string
 }
 
-export default function SearchInput({ movieTitleSearch } : SearchInputProps){
+export default function SearchInput({ movieTitleSearch,error } : SearchInputProps){
 
     const [value, setValue] = useState("");
     
@@ -19,12 +21,12 @@ export default function SearchInput({ movieTitleSearch } : SearchInputProps){
 
     return (
         <>
-            <h3 style={{"padding" : "5px"}}>
-                Search
-            </h3>
             <form onSubmit={onSubmit}>
                 <Input type="text" value={value} placeholder="Search Movie" onChange={(e) => setValue(e.target.value)}/>
             </form>
+            <ErrorMessage>
+                {error}
+            </ErrorMessage>
         </>
     )
 }

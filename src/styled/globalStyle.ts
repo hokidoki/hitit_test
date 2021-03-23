@@ -27,6 +27,9 @@ const GlobalStyles = createGlobalStyle`
         font-size : 2.0rem;
     }
     h3 {
+        text-overflow : ellipsis;
+        white-space : nowrap;
+        overflow : hidden;
         font-size : 1.5rem;
     }
 `;
