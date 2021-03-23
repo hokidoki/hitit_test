@@ -1,7 +1,7 @@
 import React,{useState}from 'react'
 import { SearchBox, SearchContainer } from '../styled/layout'
 import SearchInput from '../Components/SearchInput'
-
+import SearchList from '../Components/SearchList';
 interface InterfaceShortResult{
     Title : string,
     Poster : string,
@@ -60,6 +60,11 @@ export default function Search() {
             <SearchBox>
                 <SearchInput movieTitleSearch={movieTitleSearch}></SearchInput>
             </SearchBox>
+            <SearchList list={searchingResult.list} 
+            title={searchingResult.title}
+            page={searchingResult.page}
+            update={movieTitleSearchingUpdate}
+            />
         </SearchContainer>
     )
 }

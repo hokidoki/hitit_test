@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const AppContianer = styled.div`
     width : 60vw;
     height : 60vh;
-    
     position : absolute;
     top : 50%;
     left : 50%;
@@ -29,7 +28,7 @@ export const SearchContainer = styled.div`
     flex-basis : calc(30% - 7.5px);
     background : blue;
     color : white;
-    padding : 10px 5px 0 15px;
+    padding : 10px 5px 15px 15px;
     border-radius : 15px;
 `
 
@@ -50,4 +49,18 @@ export const Input = styled.input`
     border : 1px solid gray;
     padding : 5px;
     border-radius : 5px;
+`
+
+export const SearchListBox = styled.div`
+    flex-grow : 1;
+    max-height : 400px;
+    overflow-y : scroll;
+    padding : 10px 0px; 
+    background : black;
+`
+
+export const SearchTab = styled.div`
+    background : yellow;
+    height : 50px;
+    margin-bottom : 1px;
 `
