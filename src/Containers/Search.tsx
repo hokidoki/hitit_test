@@ -61,6 +61,7 @@ export default function Search() {
     const movieTitleSearch = async (title: string) => {
         setSerachingResult(Object.assign({},searchingResult,{loading : true}));
         const response = await movieTitleSearchFetch(title);
+        console.log(response)
         setSerachingResult({
             loading : false,
             title: title,

@@ -36,24 +36,31 @@ export const SearchContainer = styled.div`
     border-radius : 15px;
     overflow-y : hidden;
 `
-interface InterfaceLoadingOveray{
-    top : string
+
+interface InterfaceDetailObject{
+    width : string,
+    height : string
 }
 
-export const LoadingOveray = styled.div<InterfaceLoadingOveray>`
-    display : block;
-    position : absolute;
-    width : 100%;
-    height : 100%;
-    background : rgba(97,97,97,0.6) url("http://www.nyan.cat/cats/original.gif");
-    background-repeat : no-repeat;
-    background-position : center center;
-    background-size : 50px 50px;
-    top : ${props => props.top};
-    left : 0px;
-    border-radius : 15px;
-
+export const DetailObject = styled.img<InterfaceDetailObject>`
+    width : ${props => props.width};
+    height : ${props => props.height};
 `
+
+export const DetailOveray = styled.div`
+display : flex;
+flex-direction: column;
+justify-contents : center;
+position : absolute;
+width : 100%;
+height : 100%;
+background : rgba(97,97,97,0.6);
+top : 0px;
+left : 0px;
+border-radius : 15px;
+justify-content: center;
+align-items: center;
+`;
 
 export const DetailContainer = styled.div`
     display : flex;
