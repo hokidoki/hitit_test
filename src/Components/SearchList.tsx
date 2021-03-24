@@ -6,7 +6,8 @@ import {
     SearchTab,
     Thumbnail,
     ShortBox,
-    LoadingOveray
+    DetailOveray,
+    DetailObject
 } from '../styled/layout'
 import { sortedList } from '../functions/sort';
 
@@ -59,7 +60,13 @@ export default function SearchList({ list, title, page,sortBy,loading, update }:
 
     return (
         <SearchListBox onScroll={onScroll}>
-            {loading ? <LoadingOveray top="0px"/> : null}
+            {loading ? <DetailOveray>
+                <DetailObject 
+                    src={"http://www.nyan.cat/cats/original.gif"}
+                    width="50px"
+                    height="50px"
+                />
+            </DetailOveray> : null}
             {resultToTab(list)}
         </SearchListBox>
     )
