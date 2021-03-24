@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 import {
     Input,
     ErrorMessage
-} from '../styled/layout'
+} from '../styled/styled'
 
 interface SearchInputProps {
     movieTitleSearch : (title : string) => void,

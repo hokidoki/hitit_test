@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SearchBox, SearchContainer,Select } from '../styled/layout'
+import { SearchBox, SearchContainer } from '../styled/styled'
 import SearchInput from '../Components/SearchInput'
 import SearchList from '../Components/SearchList';
 

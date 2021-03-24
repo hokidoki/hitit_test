@@ -1,5 +1,5 @@
 import React from 'react'
-import { DetailOveray, DetailObject } from '../../styled/layout'
+import { DetailOveray, DetailObject } from '../../styled/styled'
 
 interface InterfaceErrorProps{
     error : string | null

@@ -13,9 +13,12 @@ export const AppContianer = styled.div`
     display : flex;
     flex-direction : column;
 `
-export const Header = styled.h1`
+export const Title = styled.h1`
     color : gray;
+    font-style : italic;
     height : 2.5rem;
+    margin-bottom : 5px;
+    text-shadow: 1px 1px 0 #262626;
 `
 export const MainContainer = styled.div`
     display : flex;
@@ -164,4 +167,27 @@ export const NameTag = styled.span`
 
 export const DescriptionDetailDiv = styled.div`
     margin-bottom : 10px;
+`
+
+export const MovieTitle = styled.h1`
+    width : calc(100% - 80px);
+    margin : 10px 0px;
+`
+
+interface InterfaceMovieRatingProps{
+    background : string
+}
+
+export const MovieRating = styled.div<InterfaceMovieRatingProps>`
+    font-size : 2.0rem;
+    line-height : 70px;
+    text-align : center;
+    color : white;
+    position : absolute;
+    width : 70px;
+    height : 70px;
+    right : 15px;
+    top : 15px;
+    border-radius : 70px;
+    background : ${props => props.background};
 `

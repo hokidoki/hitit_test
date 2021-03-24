@@ -3,7 +3,7 @@ import {
     PosterSide,
     MoviePoster,
     SubDescription
-} from '../../styled/layout'
+} from '../../styled/styled'
 
 interface InterfacePosterSide {
     Poster: string,

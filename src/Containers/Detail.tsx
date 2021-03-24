@@ -6,7 +6,8 @@ import {
 
 import {
     DetailContainer, DetailObject, DetailOveray
-} from '../styled/layout'
+} from '../styled/styled'
+import recommendMovie from '../Components/Detail/Recommend'
 
 import PosterSide from '../Components/Detail/Poster'
 import DescriptionSide from '../Components/Detail/Description'
@@ -26,11 +27,12 @@ export default function Detail({ loading, detail, error }: InterfaceDetailWrappe
                 </DetailOveray>
                  : null }
             {detail ? <MovieDetail {...detail}/> : null}
+            {!detail && !loading && !error ? <MovieDetail {...recommendMovie}/> : null}
         </DetailContainer>
     )
 }
 
-function MovieDetail({Poster,Genre,Runtime,Title,Year,Plot,Director,Writer,Actors} : InterfaceMovieDetail) {
+function MovieDetail({Poster,Genre,Runtime,Title,Year,Plot,Director,Writer,Actors,imdbRating} : InterfaceMovieDetail) {
     return (
         <>
             <PosterSide Poster={Poster}
@@ -38,6 +40,7 @@ function MovieDetail({Poster,Genre,Runtime,Title,Year,Plot,Director,Writer,Actor
                 Runtime={Runtime}
             />
             <DescriptionSide 
+                imdbRating={imdbRating}
                 Director={Director}
                 Writer={Writer}
                 Actors={Actors}

@@ -8,7 +8,7 @@ import {
     ShortBox,
     DetailOveray,
     DetailObject
-} from '../styled/layout'
+} from '../styled/styled'
 import { sortedList } from '../functions/sort';
 
 interface InterfaceShortResult {
