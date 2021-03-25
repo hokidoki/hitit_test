@@ -6,7 +6,7 @@ import {
     SearchTab,
     Thumbnail,
     ShortBox,
-    LoadingOveray,
+    Loadingoverlay,
     LoadingObject
 } from '../styled/styled'
 import { sortedList } from '../functions/sort';
@@ -57,7 +57,7 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
         <SearchListBox
             onScroll={onScroll}
         >
-            {loading ? <LoadingOveray
+            {loading ? <Loadingoverlay
             style={{"position":"sticky"}}
             >
                 <LoadingObject
@@ -65,7 +65,7 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
                     width="50px"
                     height="50px"
                 />
-            </LoadingOveray> : null}
+            </Loadingoverlay> : null}
             {resultToTab(list)}
         </SearchListBox>
     )

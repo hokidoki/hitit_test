@@ -5,26 +5,26 @@ import {
 } from "../App"
 
 import {
-    DetailContainer, LoadingObject, LoadingOveray
+    DetailContainer, LoadingObject, Loadingoverlay
 } from '../styled/styled'
 import recommendMovie from '../Components/Detail/Recommend'
 
 import PosterSide from '../Components/Detail/Poster'
 import DescriptionSide from '../Components/Detail/Description'
-import ErrorDetailOveray from '../Components/Detail/Error'
+import ErrorDetailoverlay from '../Components/Detail/Error'
 
 export default function Detail({ loading, detail, error }: InterfaceDetailWrapper) {
     return (
         <DetailContainer>
-            {error ? <ErrorDetailOveray error={error}/> : null}
+            {error ? <ErrorDetailoverlay error={error}/> : null}
             {loading ? 
-                <LoadingOveray>
+                <Loadingoverlay>
                     <LoadingObject 
                         src={"http://www.nyan.cat/cats/original.gif"}
                         width="100px"
                         height="100px"
                     />
-                </LoadingOveray>
+                </Loadingoverlay>
                  : null }
             {detail ? <MovieDetail {...detail}/> : null}
             {!detail && !loading && !error ? <MovieDetail {...recommendMovie}/> : null}

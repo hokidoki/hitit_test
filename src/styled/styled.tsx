@@ -50,7 +50,7 @@ export const LoadingObject = styled.img<InterfaceDetailObject>`
     height : ${props => props.height};
 `
 
-export const LoadingOveray = styled.div`
+export const Loadingoverlay = styled.div`
 display : flex;
 flex-direction: column;
 justify-contents : center;
