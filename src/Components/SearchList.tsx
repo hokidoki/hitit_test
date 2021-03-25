@@ -58,7 +58,7 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
             onScroll={onScroll}
         >
             {loading ? <Loadingoverlay
-            style={{"position":"sticky"}}
+            position="sticky"
             >
                 <LoadingObject
                     src={"http://www.nyan.cat/cats/original.gif"}

@@ -40,21 +40,25 @@ export const SearchContainer = styled.div`
     overflow-y : hidden;
 `
 
-interface InterfaceDetailObject{
-    width : string,
-    height : string,
+interface InterfaceLoadingObject {
+    width: string,
+    height: string,
 }
 
-export const LoadingObject = styled.img<InterfaceDetailObject>`
+export const LoadingObject = styled.img<InterfaceLoadingObject>`
     width : ${props => props.width};
     height : ${props => props.height};
 `
 
-export const Loadingoverlay = styled.div`
+interface InterfaceLoadingOverlay {
+    position: string
+}
+
+export const Loadingoverlay = styled.div<InterfaceLoadingOverlay>`
 display : flex;
 flex-direction: column;
 justify-contents : center;
-position : fixed;
+position : ${props => props.position};
 width : 100%;
 height : 100%;
 background : rgba(97,97,97,0.6);
@@ -77,7 +81,6 @@ export const DetailContainer = styled.div`
 
 export const SearchBox = styled.div`
     display : flex;
-    
     flex-direction : column;
     flex-basis : 50px;
 `
@@ -175,8 +178,8 @@ export const MovieTitle = styled.h1`
     margin : 10px 0px;
 `
 
-interface InterfaceMovieRatingProps{
-    background : string
+interface InterfaceMovieRatingProps {
+    background: string
 }
 
 export const MovieRating = styled.div<InterfaceMovieRatingProps>`

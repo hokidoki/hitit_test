@@ -8,7 +8,7 @@ interface InterfaceErrorProps{
 
 export default function Error({error} : InterfaceErrorProps) {
     return (
-        <Loadingoverlay>
+        <Loadingoverlay position="absolute">
             <LoadingObject
                 width={"30%"}
                 height={"30%"}

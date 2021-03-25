@@ -18,7 +18,7 @@ export default function Detail({ loading, detail, error }: InterfaceDetailWrappe
         <DetailContainer>
             {error ? <ErrorDetailoverlay error={error}/> : null}
             {loading ? 
-                <Loadingoverlay>
+                <Loadingoverlay position="absolute">
                     <LoadingObject 
                         src={"http://www.nyan.cat/cats/original.gif"}
                         width="100px"
