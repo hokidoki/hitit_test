@@ -42,19 +42,19 @@ export const SearchContainer = styled.div`
 
 interface InterfaceDetailObject{
     width : string,
-    height : string
+    height : string,
 }
 
-export const DetailObject = styled.img<InterfaceDetailObject>`
+export const LoadingObject = styled.img<InterfaceDetailObject>`
     width : ${props => props.width};
     height : ${props => props.height};
 `
 
-export const DetailOveray = styled.div`
+export const Loadingoverlay = styled.div`
 display : flex;
 flex-direction: column;
 justify-contents : center;
-position : absolute;
+position : fixed;
 width : 100%;
 height : 100%;
 background : rgba(97,97,97,0.6);
@@ -159,6 +159,7 @@ export const DescriptionSide = styled.div`
     max-width : 65%;
     height : 100%;
     padding-left : 20px;
+    overflow-y : scroll;
 `
 
 export const NameTag = styled.span`
