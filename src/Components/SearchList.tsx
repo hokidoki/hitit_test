@@ -10,14 +10,8 @@ import {
     DetailObject
 } from '../styled/styled'
 import { sortedList } from '../functions/sort';
+import { InterfaceShortResult } from '../Containers/Search'
 
-interface InterfaceShortResult {
-    Title: string,
-    Poster: string,
-    Type: string,
-    Year: string,
-    imdbID: string
-}
 
 interface InterfaceSearchListProps {
     loading : boolean,
