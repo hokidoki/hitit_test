@@ -5,7 +5,7 @@ import {
 } from "../App"
 
 import {
-    DetailContainer, DetailObject, DetailOveray
+    DetailContainer, LoadingObject, LoadingOveray
 } from '../styled/styled'
 import recommendMovie from '../Components/Detail/Recommend'
 
@@ -18,13 +18,13 @@ export default function Detail({ loading, detail, error }: InterfaceDetailWrappe
         <DetailContainer>
             {error ? <ErrorDetailOveray error={error}/> : null}
             {loading ? 
-                <DetailOveray>
-                    <DetailObject 
+                <LoadingOveray>
+                    <LoadingObject 
                         src={"http://www.nyan.cat/cats/original.gif"}
                         width="100px"
                         height="100px"
                     />
-                </DetailOveray>
+                </LoadingOveray>
                  : null }
             {detail ? <MovieDetail {...detail}/> : null}
             {!detail && !loading && !error ? <MovieDetail {...recommendMovie}/> : null}
