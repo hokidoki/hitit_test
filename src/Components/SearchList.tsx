@@ -54,7 +54,7 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
         // console.log(scrollTop)
         // console.log(scrollHeight)
 
-        if (scrollHeight === scrollTop + clientHeight) {
+        if (scrollHeight  === scrollTop + clientHeight) {
             update(title, page + 1);
         }
 
@@ -87,8 +87,9 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
             ref={searchList}
         >
             {loading ? <Loadingoverlay
+            onClick={(e) => e.stopPropagation()}
             position="sticky"
-            height="100%"
+            height="calc(100% + 10px)"
             >
                 <LoadingObject
                     src={"http://www.nyan.cat/cats/original.gif"}
