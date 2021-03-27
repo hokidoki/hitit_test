@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useRef, useEffect } from 'react'
 import { DetailContext } from '../App'
 import { SortBy } from '../Containers/Search'
 import {
@@ -29,7 +29,7 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
         return sortedList(list, sortBy).map((shortResult: InterfaceShortResult, index: number) => {
             return <Tab
                 clicked={shortResult === clickedMovie}
-                setClickedMovie={() => setClickedMovie(shortResult)}
+                setClickedMovie={() =>  setClickedMovie(shortResult)}
                 key={`${shortResult.imdbID}-${index}`}
                 Title={shortResult.Title}
                 Type={shortResult.Type}
@@ -39,11 +39,20 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
             />
         })
     }
+    const searchList = useRef<any>(null);
 
     const onScroll = (e: any) => {
+        if(loading){
+            searchList.current.style.overflow = "hidden"
+            searchList.current.style.paddingRight = "12px"
+        }
+            
+        
         const scrollHeight = e.target.scrollHeight;
         const scrollTop = e.target.scrollTop;
         const clientHeight = e.target.clientHeight;
+        // console.log(scrollTop)
+        // console.log(scrollHeight)
 
         if (scrollHeight === scrollTop + clientHeight) {
             update(title, page + 1);
@@ -51,14 +60,35 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
 
     }
 
+    
+    
+    useEffect(()=>{
+        if(page === 1){
+            searchList.current.scrollTo(0,0)
+        }
+    },[page])
 
+    useEffect(()=>{
+        if(!loading){
+            searchList.current.style.overflow = "scroll"
+            searchList.current.style.paddingRight = ""
+        }else{
+            searchList.current.scrollTop -= 10; 
+            
+        }
+    },[loading])
+
+    
+    
 
     return (
         <SearchListBox
             onScroll={onScroll}
+            ref={searchList}
         >
             {loading ? <Loadingoverlay
             position="sticky"
+            height="100%"
             >
                 <LoadingObject
                     src={"http://www.nyan.cat/cats/original.gif"}
@@ -73,10 +103,11 @@ export default function SearchList({ list, title, page, sortBy, loading, update 
 
 interface InterfaceTabProps extends InterfaceShortResult {
     clicked: boolean,
-    setClickedMovie: () => void
+    setClickedMovie: () => void,
+    
 }
 
-function Tab({ Title, Year, imdbID, Poster, clicked, setClickedMovie }: InterfaceTabProps) {
+function Tab({ Title, Year, imdbID, Poster, clicked,setClickedMovie }: InterfaceTabProps) {
 
     return (
         <DetailContext.Consumer>
@@ -85,8 +116,12 @@ function Tab({ Title, Year, imdbID, Poster, clicked, setClickedMovie }: Interfac
                     <SearchTab
                         background={clicked ? "rgba(162,162,162,0.22)" : "none"}
                         onClick={() => {
+                            if(value.loading){
+                                return;
+                            }
                             setClickedMovie();
                             value.getMovieDetail(imdbID);
+                            
                         }}>
                         <Thumbnail src={Poster}></Thumbnail>
                         <ShortBox>

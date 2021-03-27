@@ -12,15 +12,15 @@ export interface InterfaceShortResult {
 }
 
 interface InterfaceSearchingResult {
-    loading : boolean,
+    loading: boolean,
     title: string,
     list: Array<InterfaceShortResult>,
     page: number,
     error: string
 }
 interface InterfaceSelectBoxProps {
-    sortBy : SortBy,
-    setSortBy : (sortBy : SortBy) => void
+    sortBy: SortBy,
+    setSortBy: (sortBy: SortBy) => void
 }
 
 export enum SortBy {
@@ -33,9 +33,9 @@ export enum SortBy {
 
 export default function Search() {
 
-    const [sortBy,setSortBy] = useState<SortBy>(SortBy.standard);
+    const [sortBy, setSortBy] = useState<SortBy>(SortBy.standard);
     const [searchingResult, setSerachingResult] = useState<InterfaceSearchingResult>({
-        loading : false,
+        loading: false,
         title: "",
         list: [],
         page: 0,
@@ -59,36 +59,39 @@ export default function Search() {
         return response;
     }
     const movieTitleSearch = async (title: string) => {
-        setSerachingResult(Object.assign({},searchingResult,{loading : true}));
-        const response = await movieTitleSearchFetch(title);
-        console.log(response)
-        setSerachingResult({
-            loading : false,
-            title: title,
-            list: response.searchingResult,
-            page: 1,
-            error: response.error
-        })
+        if (!searchingResult.loading) {
+            setSerachingResult(Object.assign({}, searchingResult, { loading: true }));
+            const response = await movieTitleSearchFetch(title);
+            setSerachingResult({
+                loading: false,
+                title: title,
+                list: response.searchingResult,
+                page: 1,
+                error: response.error
+            })
+        }
     }
 
     const movieTitleSearchingUpdate = async (title: string, page: number) => {
-        setSerachingResult(Object.assign({},searchingResult,{loading : true}));
-        const response = await movieTitleSearchFetch(title, page);
-        setSerachingResult({
-            loading : false,
-            title: title,
-            list: [...searchingResult.list, ...response.searchingResult],
-            page: page,
-            error: response.error
-        })
+        if (!searchingResult.loading) {
+            setSerachingResult(Object.assign({}, searchingResult, { loading: true }));
+            const response = await movieTitleSearchFetch(title, page);
+            setSerachingResult({
+                loading: false,
+                title: title,
+                list: [...searchingResult.list, ...response.searchingResult],
+                page: response.error ? page -1 : page ,
+                error: response.error
+            })
+        }
     }
 
     return (
         <SearchContainer>
             <SearchBox>
-                <h3 style={{ "padding": "5px", "position" : "relative"}}>
+                <h3 style={{ "padding": "5px", "position": "relative" }}>
                     Search
-                    <SelectBox 
+                    <SelectBox
                         sortBy={sortBy}
                         setSortBy={setSortBy}
                     />
@@ -110,14 +113,14 @@ export default function Search() {
     )
 }
 
-function SelectBox({sortBy,setSortBy} : InterfaceSelectBoxProps) {
-    
+function SelectBox({ sortBy, setSortBy }: InterfaceSelectBoxProps) {
+
     return (
         <>
-            <select onChange={(e : any) => setSortBy(Number(e.target.value))}
+            <select onChange={(e: any) => setSortBy(Number(e.target.value))}
                 value={sortBy}
-                style={{"border" : "none", "position" : "absolute", "right" : "0","bottom" : "4px"}}
-                >
+                style={{ "border": "none", "position": "absolute", "right": "0", "bottom": "4px" }}
+            >
                 <option value={SortBy.standard}>Standard</option>
                 <option value={SortBy.titleAsc}>Title asc</option>
                 <option value={SortBy.titleDes}>Title des</option>

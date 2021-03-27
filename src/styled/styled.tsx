@@ -51,7 +51,8 @@ export const LoadingObject = styled.img<InterfaceLoadingObject>`
 `
 
 interface InterfaceLoadingOverlay {
-    position: string
+    position: string,
+    height : string
 }
 
 export const Loadingoverlay = styled.div<InterfaceLoadingOverlay>`
@@ -60,7 +61,7 @@ flex-direction: column;
 justify-contents : center;
 position : ${props => props.position};
 width : 100%;
-height : 100%;
+height : ${props => props.height};
 background : rgba(97,97,97,0.6);
 top : 0px;
 left : 0px;
@@ -93,10 +94,11 @@ export const Input = styled.input`
 `
 
 export const SearchListBox = styled.div`
-position : relative;
+    position : relative;
     flex-grow : 1;
     max-height : calc(100% - 50px);
     overflow-y : scroll;
+    padding-bottom : 10px;
     &::-webkit-scrollbar{
         width : 10px
     }

@@ -12,6 +12,7 @@ import SearchContainer from './Containers/Search';
 
 export const DetailContext = React.createContext({
   getMovieDetail: (imdbID: string) => { },
+  loading : false
 })
 
 export interface InterfaceDetailWrapper {
@@ -51,13 +52,14 @@ function App() {
       detail : getJson.Response === "True" ? getJson : null,
       error : getJson.Response === "True" ? null : "Get data fail... sorry"
     }
-
     return detailResult;
   }
 
   const getMovieDetail = async (imdbID: string) => {
-    const response : InterfaceDetailWrapper = await getMovieDetailFetch(imdbID);
-    setDetailWrapper(response);
+    if(!detailWrapper.loading){
+      const response : InterfaceDetailWrapper = await getMovieDetailFetch(imdbID);
+      setDetailWrapper(response);
+    }
   }
 
   return (
@@ -68,6 +70,7 @@ function App() {
         <MainContainer>
           <DetailContext.Provider value={{
             getMovieDetail: getMovieDetail,
+            loading : detailWrapper.loading
           }}>
             <SearchContainer />
           </DetailContext.Provider>

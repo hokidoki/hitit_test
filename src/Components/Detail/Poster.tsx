@@ -12,7 +12,7 @@ interface InterfacePosterSide {
 }
 
 export default function Poster({ Poster,Genre,Runtime }: InterfacePosterSide) {
-    console.log(Poster)
+    
     return (
         <PosterSide>
             <MoviePoster src={Poster}/>
